@@ -41,7 +41,7 @@ export default {
         if (!remainingPath.startsWith('/')) remainingPath = '/' + remainingPath;
 
         const targetUrl = `${rule.destination}${remainingPath}${url.search}`;
-        return fetch(new Request(targetUrl, request));
+        return fetch(new Request(targetUrl, { ...request, redirect: 'follow' }));
       }
     }
 
