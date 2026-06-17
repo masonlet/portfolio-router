@@ -28,7 +28,7 @@ export default {
 
     for (const rule of rewrites)
       if (rule.source && pathname === rule.source)
-				return fetch(rule.destination, request);
+				return fetch(`${rule.destination}${url.search}`, request);
 
     for (const rule of rewrites) {
       if (rule.prefix && pathname.startsWith(rule.prefix)) {
