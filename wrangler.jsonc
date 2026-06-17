@@ -18,7 +18,11 @@
     { "pattern": "masonletoile.ca/*", "zone_name": "masonletoile.ca" },
     { "pattern": "masonletoile.com/*", "zone_name": "masonletoile.com" },
 		{ "pattern": "masonletoile.ca", "zone_name": "masonletoile.ca" },
-    { "pattern": "masonletoile.com", "zone_name": "masonletoile.com" }
+    { "pattern": "masonletoile.com", "zone_name": "masonletoile.com" },
+    { "pattern": "www.masonletoile.ca/*", "zone_name": "masonletoile.ca" },
+    { "pattern": "www.masonletoile.com/*", "zone_name": "masonletoile.com" },
+		{ "pattern": "www.masonletoile.ca", "zone_name": "masonletoile.ca" },
+    { "pattern": "www.masonletoile.com", "zone_name": "masonletoile.com" }
   ]
 	/**
 	 * Smart Placement
