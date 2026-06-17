@@ -45,6 +45,6 @@ export default {
       }
     }
 
-    return fetch(request);
+    return fetch(`https://portfolio-8dg.pages.dev${url.pathname}${url.search}`, request);
   }
 } satisfies ExportedHandler<Env>;
