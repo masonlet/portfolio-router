@@ -1,29 +1,33 @@
-import {
-	env,
-	createExecutionContext,
-	waitOnExecutionContext,
-	SELF,
-} from "cloudflare:test";
+import { SELF } from "cloudflare:test";
 import { describe, it, expect } from "vitest";
-import worker from "../src/index";
 
-// For now, you'll need to do something like this to get a correctly-typed
-// `Request` to pass to `worker.fetch()`.
-const IncomingRequest = Request<unknown, IncomingRequestCfProperties>;
+describe("portfolio-router", () => {
+  it("redirects .com to .ca (308), preserving path and query", async () => {
+    const res = await SELF.fetch("https://masonletoile.com/foo?bar=1", { redirect: "manual" });
+    expect(res.status).toBe(308);
+    expect(res.headers.get("location")).toBe("https://masonletoile.ca/foo?bar=1");
+  });
 
-describe("Hello World worker", () => {
-	it("responds with Hello World! (unit style)", async () => {
-		const request = new IncomingRequest("http://example.com");
-		// Create an empty context to pass to `worker.fetch()`.
-		const ctx = createExecutionContext();
-		const response = await worker.fetch(request, env, ctx);
-		// Wait for all `Promise`s passed to `ctx.waitUntil()` to settle before running test assertions
-		await waitOnExecutionContext(ctx);
-		expect(await response.text()).toMatchInlineSnapshot(`"Hello World!"`);
-	});
+  it("redirects www.com to .ca (308)", async () => {
+    const res = await SELF.fetch("https://www.masonletoile.com/", { redirect: "manual" });
+    expect(res.status).toBe(308);
+    expect(res.headers.get("location")).toBe("https://masonletoile.ca/");
+  });
 
-	it("responds with Hello World! (integration style)", async () => {
-		const response = await SELF.fetch("https://example.com");
-		expect(await response.text()).toMatchInlineSnapshot(`"Hello World!"`);
-	});
+  it("redirects www.ca to bare .ca (308)", async () => {
+    const res = await SELF.fetch("https://www.masonletoile.ca/", { redirect: "manual" });
+    expect(res.status).toBe(308);
+    expect(res.headers.get("location")).toBe("https://masonletoile.ca/");
+  });
+
+  it("redirects a bare prefix to its trailing-slash form (308)", async () => {
+    const res = await SELF.fetch("https://masonletoile.ca/pixel-parker", { redirect: "manual" });
+    expect(res.status).toBe(308);
+    expect(res.headers.get("location")).toBe("https://masonletoile.ca/pixel-parker/");
+  });
+
+  it("does not match a prefix that is only a string prefix, not a path segment", async () => {
+    const res = await SELF.fetch("https://masonletoile.ca/pixel-parker-notes", { redirect: "manual" });
+    expect(res.status).not.toBe(308);
+  });
 });

@@ -2,6 +2,7 @@
 
 A [Cloudflare Worker](https://developers.cloudflare.com/workers/) that fronts my portfolio domains, handling canonical redirects and routing paths to the backends that serve them. It runs on every request to `masonletoile.ca` / `.com` (bare and `www`) and does three things, in order:
 
+![CI](https://github.com/masonlet/portfolio-router/actions/workflows/ci.yml/badge.svg)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 1. **Canonicalizes the host**: any `.com` or `www.*.com` request is 308-redirected to the matching `masonletoile.ca` URL, preserving path and query.
