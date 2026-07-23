@@ -1,6 +1,6 @@
 interface RewriteRule {
-  source?: string;
-  prefix?: string;
+  source?:     string;
+  prefix?:     string;
   destination: string;
 }
 
@@ -16,14 +16,14 @@ export default {
     const pathname = url.pathname;
 
     const rewrites: RewriteRule[] = [
-      { source: '/api/languages', destination: 'https://github-top-languages.vercel.app/api/languages' },
-      { source: '/api/contact', destination: 'https://contact-api-resend.vercel.app/api/contact' },
-      { source: '/api/readme', destination: 'https://readme-api-nine.vercel.app/api/readme' },
-      { prefix: '/contact-api-demo', destination: 'https://contact-api-demo.pages.dev' },
-      { prefix: '/readme-api-demo', destination: 'https://readme-api-demo.pages.dev' },
-      { prefix: '/pixel-parker', destination: 'https://pixel-parker.pages.dev' },
-      { prefix: '/starweb-sandbox', destination: 'https://starweb-sandbox.pages.dev' },
-      { prefix: '/gh-top-languages-builder', destination: 'https://gh-top-languages-builder.pages.dev' }
+      { source: '/api/languages',    destination: 'https://github-top-languages.vercel.app/api/languages' },
+      { source: '/api/contact',      destination: 'https://contact-api-resend.vercel.app/api/contact' 		},
+      { source: '/api/readme',       destination: 'https://readme-api-nine.vercel.app/api/readme' 				},
+      { prefix: '/contact-api-demo', destination: 'https://contact-api-demo.pages.dev' 									  },
+      { prefix: '/readme-api-demo',  destination: 'https://readme-api-demo.pages.dev' 										},
+      { prefix: '/pixel-parker',     destination: 'https://pixel-parker.pages.dev' 												},
+      { prefix: '/starweb-sandbox',  destination: 'https://starweb-sandbox.pages.dev' 										},
+      { prefix: '/gh-top-languages-builder', destination: 'https://gh-top-languages-builder.pages.dev'    }
     ];
 
     for (const rule of rewrites)
