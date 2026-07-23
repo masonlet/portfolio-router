@@ -24,7 +24,7 @@ export default {
      || url.hostname === 'www.masonletoile.ca'
     ) {
       url.hostname = 'masonletoile.ca';
-      return Response.redirect(url.toString(), 301);
+      return Response.redirect(url.toString(), 308);
     }
 
     const pathname = url.pathname;
@@ -37,7 +37,7 @@ export default {
       if (rule.prefix && (pathname === rule.prefix || pathname.startsWith(rule.prefix + '/'))) {
         if (pathname === rule.prefix) {
           url.pathname = rule.prefix + '/';
-          return Response.redirect(url.toString(), 301);
+          return Response.redirect(url.toString(), 308);
         }
 
         return fetch(
