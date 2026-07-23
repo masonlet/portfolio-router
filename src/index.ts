@@ -19,7 +19,10 @@ export default {
   async fetch(request: Request): Promise<Response> {
     const url = new URL(request.url);
 
-    if (url.hostname === 'masonletoile.com' || url.hostname === 'www.masonletoile.com') {
+    if (url.hostname === 'masonletoile.com'
+     || url.hostname === 'www.masonletoile.com'
+     || url.hostname === 'www.masonletoile.ca'
+    ) {
       url.hostname = 'masonletoile.ca';
       return Response.redirect(url.toString(), 301);
     }
