@@ -43,6 +43,10 @@ Routing logic lives entirely in [`src/index.ts`](src/index.ts). Cloudflare trigg
 
 `worker-configuration.d.ts` is generated (`npm run cf-typegen`) and committed so the project typechecks on a fresh clone without a Cloudflare login.
 
+## Acknowledgements
+
+Bootstrapped with [create-cloudflare](https://developers.cloudflare.com/workers/get-started/guide/) (C3).
+
 ## License
 
 MIT License - see [LICENSE](./LICENSE) for details.
