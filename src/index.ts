@@ -31,17 +31,16 @@ export default {
 		);
 
     for (const rule of rewrites) {
-      if (rule.prefix && pathname.startsWith(rule.prefix)) {
+      if (rule.prefix && (pathname === rule.prefix || pathname.startsWith(rule.prefix + '/'))) {
         if (pathname === rule.prefix) {
           url.pathname = rule.prefix + '/';
           return Response.redirect(url.toString(), 301);
         }
 
-        let remainingPath = pathname.substring(rule.prefix.length);
-        if (!remainingPath.startsWith('/')) remainingPath = '/' + remainingPath;
-
-        const targetUrl = `${rule.destination}${remainingPath}${url.search}`;
-        return fetch(new Request(targetUrl, { ...request, redirect: 'follow' }));
+        return fetch(
+          `${rule.destination}${pathname.substring(rule.prefix.length)}${url.search}`,
+          request
+        );
       }
     }
 
