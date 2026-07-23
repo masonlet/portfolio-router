@@ -26,9 +26,9 @@ export default {
       { prefix: '/gh-top-languages-builder', destination: 'https://gh-top-languages-builder.pages.dev'    }
     ];
 
-    for (const rule of rewrites)
-      if (rule.source && pathname === rule.source)
-				return fetch(`${rule.destination}${url.search}`, request);
+    for (const rule of rewrites) if (rule.source && pathname === rule.source) return fetch(
+			`${rule.destination}${url.search}`, request
+		);
 
     for (const rule of rewrites) {
       if (rule.prefix && pathname.startsWith(rule.prefix)) {
